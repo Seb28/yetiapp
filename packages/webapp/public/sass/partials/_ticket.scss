@@ -1,0 +1,127 @@
+////////////
+// TICKET //
+////////////
+
+.ticket{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 100%;
+	overflow: auto;
+	background-color: $bg-color;
+	transition: transform .3s ease-out;
+
+	.show-ticket &{
+		transform: translate3d(-100%, 0, 0);
+	}
+}
+
+// HEADER
+.ticket-header{
+	width: 100%;
+	height: 50px;
+	background-color: $yeti-color;
+	@include inline-children;
+}
+
+.ticket-header-back{
+	position: relative;
+	width: 50px;
+	height: 100%;
+	
+	&::before,
+	&::after{
+		content: '';
+		position: absolute;
+		width: 20px;
+		height: 2px;
+		top: 50%;
+		left: 50%;
+		background-color: white;
+	}
+
+	&::before{transform: translate3d(-50%, -50%, 0) rotate(45deg);}
+	&::after{transform: translate3d(-50%, -50%, 0) rotate(-45deg);}
+}
+
+.ticket-header-title{
+	color: white;
+}
+
+
+// CONTAINER
+.ticket-container{
+	height: calc(100% - 50px);
+    overflow: auto;
+}
+
+// Shop
+.ticket-shop{
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.ticket-shop-logo{
+	max-width: 30%;
+	margin-top: 20px;
+	border-radius: 100%;
+}
+.ticket-shop-name{
+	margin: 10px 0 0 0;
+}
+
+
+// Content
+.ticket-content,
+.ticket-summary{
+	margin: 10px;
+    padding: 10px;
+	border-radius: 2px;
+	background-color: white;
+}
+
+.ticket-content-item,
+.ticket-summary-item{
+	display: flex;
+	height: 50px;
+	line-height: 50px;
+
+	> span{padding-left: 10px;}
+}
+
+.ticket-content-item-quantity{width: 30px;}
+
+.ticket-content-item-name,
+.ticket-summary-item-label{
+	flex: 1;
+
+	.total &,
+	.tax &{font-weight: 700;}
+}
+
+.ticket-content-item-quantity,
+.ticket-content-item-price,
+.ticket-summary-item-price{
+    font-weight: 700;
+}
+
+
+// Barcode
+.ticket-barcode{
+	padding: 20px 0;
+	text-align: center;
+}
+
+.ticket-barcode-content{
+	width: 100%;
+	height: 60px;
+    background-image: url('../img/barcode.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.ticket-barcode-number{
+	line-height: 40px;
+	font-weight: 700;
+}

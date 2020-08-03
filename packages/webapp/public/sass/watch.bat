@@ -1,0 +1,1 @@
+sass --compass --watch --style compressed .:C:\Users\User\Desktop\YETI\App\css

@@ -1,0 +1,22 @@
+{
+  "name": "yetiapp",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start:api": "npm -C ./packages/api run start"
+  },
+  "author": "Sébastien David",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "helmet": "^3.21.2",
+    "jwks-rsa": "^1.6.0",
+    "mongoose": "^5.8.3",
+    "morgan": "^1.9.1",
+    "dotenv": "^8.2.0"
+  }
+}

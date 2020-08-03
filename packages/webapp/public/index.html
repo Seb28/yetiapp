@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>YETI App</title>
+
+		<link rel="icon" type="image/png" href="img/yeti_logo.png" sizes="32x32" />
+		<link rel="stylesheet" type="text/css" href="css/yetiapp.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap" rel="stylesheet">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<script src="js/actions.js"></script>
+	</head>
+	<body id="body" class="show-list">
+		<section class="list">
+			<header class="list-header">
+				<img class="list-header-logo" src="img/yeti_logo.png" alt="yeti logo" />
+				<input class="list-header-search" type="search" placeholder="Rechercher un ticket" name="search" />
+			</header>
+			<ul class="list-content">
+<!-- 				<li class="list-content-label">Janvier</li>
+				<li class="list-content-item">
+					<img class="item-logo" src="img/shops/logo_leclerc.png" alt="shop logo" />
+					<div class="item-text">
+						<span class="item-text-name">Magasin Leclerc</span>
+						<span class="item-text-date">Le 28/01/2020 à 15h35</span>
+					</div>
+					<span class="item-price">23,52€</span>
+				</li> -->
+			</ul>
+		</section>
+	  	<script type="text/javascript" src="js/injector.js"></script>
+		<!-- TICKET -->
+		<section class="ticket">
+			<header class="ticket-header">
+				<button class="ticket-header-back" id="ticketHeaderBack" onclick="back()"></button>
+				<h2 class="ticket-header-title"></h2>
+			</header>
+			<div class="ticket-container">
+				<div class="ticket-shop">
+					<img src="" alt="ticket shop logo" class="ticket-shop-logo">
+					<h3 class="ticket-shop-name"></h3>
+					<span class="ticket-shop-info"></span>
+				</div>
+				<ul class="ticket-content">
+					<li class="ticket-content-item article">
+					</li>
+				</ul>
+				<ul class="ticket-summary">
+					<li class="ticket-summary-item total">
+						<span class="ticket-summary-item-label"></span>
+						<span class="ticket-summary-item-price"></span>
+					</li>
+				</ul>
+				<div class="ticket-barcode">
+					<div class="ticket-barcode-content"></div>
+					<span class="ticket-barcode-number"></span>
+				</div>
+				<div class="ticket-shop bottom">
+					<span class="ticket-shop-info date"></span>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

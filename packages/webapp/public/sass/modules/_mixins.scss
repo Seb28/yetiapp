@@ -1,0 +1,60 @@
+// Hacks for inline-block children //
+
+@mixin inline-children($fontsize: $main-fs,$letterspacing: 0){
+	font-size: 0;
+	letter-spacing: -4px;
+	> *{
+		display: inline-block;
+		vertical-align: top;
+		font-size: $fontsize;
+		letter-spacing: $letterspacing;
+	}
+}
+
+// Prefixs //
+
+@mixin myPrefixer($name, $argument) {
+	-webkit-#{$name}: #{$argument};
+	   -moz-#{$name}: #{$argument};
+		  -ms-#{$name}: #{$argument};
+		   -o-#{$name}: #{$argument};
+			    #{$name}: #{$argument};
+}
+
+@mixin myTransitionPrefixer($name, $argument) {
+  -webkit-#{$name}: -webkit-#{$argument};
+     -moz-#{$name}:    -moz-#{$argument};
+      -ms-#{$name}:     -ms-#{$argument};
+       -o-#{$name}:      -o-#{$argument};
+          #{$name}:         #{$argument};
+}
+
+
+// Retina //
+
+@mixin background-image-retina($file, $type, $width, $height) {
+  background-image: url('../img/' + $file + '.' + $type);
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (-moz-min-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx){
+    & {
+      background-image: url('../img/' + $file + '@2x.' + $type);
+      -webkit-background-size: $width $height;
+         -moz-background-size: $width $height;
+      	   -o-background-size: $width $height;
+      		    background-size: $width $height;
+    }
+  }
+}
+
+@mixin text-overflow
+{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+// Widget styles //
