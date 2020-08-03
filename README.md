@@ -4,7 +4,7 @@
 
 * `npm install` (installs lerna)
 * `lerna bootstrap` (connects all the packages)
-* `npm -C ./packages/usage run start` 
+* `lerna exec npm run start` 
 
 * Tree Structure
 
