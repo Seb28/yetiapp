@@ -8,5 +8,6 @@ export class Routes {
     app.route("/").get(this.nodesController.index);
 
     app.route("/nodes").get(this.nodesController.index);
+
   }
 }
