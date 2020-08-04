@@ -1,0 +1,7 @@
+node_modules
+resources
+src # No nee to have src here, we only take the builded sources in /lib
+.env*
+Dockerfile
+README.md
+tsconfig.json
