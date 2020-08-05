@@ -1,0 +1,65 @@
+{
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Operation"
+  },
+  "definitions": {
+    "Operation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["op", "path", "value"],
+          "properties": {
+            "op": {
+              "description": "The operation to perform.",
+              "type": "string",
+              "enum": ["add", "replace", "test", "_get"]
+            },
+            "value": {
+              "description": "The value to add, replace or test."
+            },
+            "path": {
+              "$ref": "#/definitions/Path"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["op", "path"],
+          "properties": {
+            "op": {
+              "description": "The operation to perform.",
+              "type": "string",
+              "enum": ["remove"]
+            },
+            "path": {
+              "$ref": "#/definitions/Path"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["op", "path", "from"],
+          "properties": {
+            "op": {
+              "description": "The operation to perform.",
+              "type": "string",
+              "enum": ["move", "copy"]
+            },
+            "from": {
+              "description": "A JSON Pointer path pointing to the locatoin to move/copy from.",
+              "type": "string"
+            },
+            "path": {
+              "$ref": "#/definitions/Path"
+            }
+          }
+        }
+      ]
+    },
+    "Path": {
+      "description": "A JSON Pointer path.",
+      "type": "string"
+    }
+  }
+}
