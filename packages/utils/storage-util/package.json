@@ -1,9 +1,9 @@
 {
-  "name": "@yeti/schema-registry",
+  "name": "@yeti/storage-util",
   "version": "1.1.0",
   "description": "> TODO: description",
   "types": "./lib/index.d.ts",
-  "main": "./lib/schema-registry.js",
+  "main": "./lib/storage-util.js",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node ./src/server.ts",
@@ -11,14 +11,12 @@
     "startdev": "nodemon ./lib/server.js",
     "prod": "npm run build && npm run start"
   },
-  "dependencies": {
-    "@yeti/logger-util": "^1.1.0",
-    "@yeti/storage-util": "^1.1.0",
-    "jsonschema": "1.2.5",
-    "winston-elasticsearch": "^0.9.0"
-  },
   "devDependencies": {
-    "@yeti/models": "^1.0.1",
-    "@types/json-schema": "^7.0.4"
+    "@yeti/logger-util": "^1.1.0"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^4.3.1",
+    "date-fns": "2.9.0",
+    "winston-elasticsearch": "^0.9.0"
   }
 }

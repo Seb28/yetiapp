@@ -13,13 +13,10 @@
     "dev": "ts-node ./src/index.ts",
     "start": "node ./lib/index.js",
     "clean": "rimraf ./lib",
-    "typings": "npx lerna exec --scope gapi -- node -r ts-node/register src/index.ts ./resources -t --schema -o ./src"
+    "typings": "npx lerna exec -- node -r ts-node/register src/index.ts ./resources -t --schema -o ./src"
   },
   "dependencies": {
     "fp-ts": "2.4.4",
     "io-ts": "2.1.3"
-  },
-  "devDependencies": {
-    "gapi": "^1.0.1"
   }
 }
