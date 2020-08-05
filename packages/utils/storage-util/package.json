@@ -1,5 +1,5 @@
 {
-  "name": "@yeti/storage-util",
+  "name": "storage-util",
   "version": "1.1.0",
   "description": "> TODO: description",
   "types": "./lib/index.d.ts",
@@ -12,7 +12,7 @@
     "prod": "npm run build && npm run start"
   },
   "devDependencies": {
-    "@yeti/logger-util": "^1.1.0"
+    "logger-util": "^1.1.0"
   },
   "dependencies": {
     "@google-cloud/storage": "^4.3.1",

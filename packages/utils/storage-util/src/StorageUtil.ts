@@ -1,5 +1,5 @@
 import * as Storage from '@google-cloud/storage'
-import { consoleLogger } from '@yeti/logger-util'
+import { consoleLogger } from 'logger-util'
 import { Readable } from 'stream'
 import { parseISO } from 'date-fns'
 import util from 'util'
