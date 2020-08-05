@@ -1,1 +1,1 @@
-export { Ticket } from './ticket'
+export { ticket } from './ticket'
