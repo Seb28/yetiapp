@@ -1,14 +1,14 @@
 {
-  "name": "@yeti/logger-util",
+  "name": "logger-util",
   "version": "1.1.0",
   "description": "> TODO: description",
   "types": "./lib/index.d.ts",
   "main": "./lib/logger-util.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node ./src/server.ts",
-    "start": "node ./lib/server.js",
-    "startdev": "nodemon ./lib/server.js",
+    "dev": "ts-node ./src/index.ts",
+    "start": "node ./lib/index.js",
+    "startdev": "nodemon ./lib/index.js",
     "prod": "npm run build && npm run start"
   },
   "dependencies": {

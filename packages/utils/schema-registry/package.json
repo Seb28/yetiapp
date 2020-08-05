@@ -1,5 +1,5 @@
 {
-  "name": "@yeti/schema-registry",
+  "name": "schema-registry",
   "version": "1.1.0",
   "description": "> TODO: description",
   "types": "./lib/index.d.ts",
@@ -12,13 +12,13 @@
     "prod": "npm run build && npm run start"
   },
   "dependencies": {
-    "@yeti/logger-util": "^1.1.0",
-    "@yeti/storage-util": "^1.1.0",
+    "logger-util": "^1.1.0",
+    "storage-util": "^1.1.0",
     "jsonschema": "1.2.5",
     "winston-elasticsearch": "^0.9.0"
   },
   "devDependencies": {
-    "@yeti/models": "^1.0.1",
+    "models": "^1.0.1",
     "@types/json-schema": "^7.0.4"
   }
 }

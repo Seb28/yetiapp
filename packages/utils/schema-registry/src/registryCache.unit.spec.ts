@@ -1,7 +1,7 @@
 import assert from 'assert'
 import fs from 'fs'
 import sinon from 'sinon'
-import { StorageUtil } from '@yeti/storage-util'
+import { StorageUtil } from 'storage-util'
 
 import { RegistryCache } from './registryCache'
 import { SchemaValidator } from './schemaValidator'

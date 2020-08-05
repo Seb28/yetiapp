@@ -1,5 +1,5 @@
-import { consoleLogger } from '@yeti/logger-util'
-import { StorageUtil } from '@yeti/storage-util'
+import { consoleLogger } from 'logger-util'
+import { StorageUtil } from 'storage-util'
 import { SchemaValidator } from './schemaValidator'
 import { Logger } from 'winston'
 

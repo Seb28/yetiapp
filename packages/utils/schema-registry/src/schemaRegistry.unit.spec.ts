@@ -2,7 +2,7 @@ import assert from 'assert'
 import fs from 'fs'
 import sinon from 'sinon'
 
-import { StorageUtil } from '@leclerc/storage-util'
+import { StorageUtil } from 'storage-util'
 
 import { SchemaRegistry } from './schemaRegistry'
 import { RegistryCache } from './registryCache'
