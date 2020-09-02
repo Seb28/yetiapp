@@ -1,1 +1,0 @@
-export { ticket } from './ticket'
