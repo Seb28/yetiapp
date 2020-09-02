@@ -6,6 +6,7 @@ import reader from 'readline-sync'
 
 import { Kafka } from 'kafkajs'
 
+const ajv = new Ajv()
 const kafka = new Kafka({
   clientId: 'test-app',
   brokers: ['localhost:9192'],
@@ -29,19 +30,18 @@ async function sendPayload(input: string) {
 }
 
 export class TicketController {
-  public async index(req: Request, res: Response) {
-    const ajv = new Ajv()
-    const data = req.body
-    const isValid = ajv.validate(ticketSchema, data)
+  public async update(req: Request, res: Response) {
+    const yetiId = req.query['yetiId']
+    const ticket = req.body.ticket
+    const isValid = ajv.validate(ticketSchema, ticket)
     if (!isValid) {
       const errorMessages = ajv.errorsText()
       console.warn('E_01', 'Validation Error', errorMessages)
       res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
     } else {
-      const yetiId = uuid()
       const message = JSON.stringify({
         yetiId: yetiId,
-        ticket: data,
+        ticket: ticket,
       })
 
       await producer.connect()
@@ -54,6 +54,35 @@ export class TicketController {
 
       res.json({
         yetiId: yetiId,
+        ticket: ticket,
+      })
+    }
+  }
+  public async add(req: Request, res: Response) {
+    const ticket = req.body
+    const isValid = ajv.validate(ticketSchema, ticket)
+    if (!isValid) {
+      const errorMessages = ajv.errorsText()
+      console.warn('E_01', 'Validation Error', errorMessages)
+      res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
+    } else {
+      const yetiId = uuid()
+      const message = JSON.stringify({
+        yetiId: yetiId,
+        ticket: ticket,
+      })
+
+      await producer.connect()
+      try {
+        await sendPayload(message)
+      } catch (e) {
+        console.error('E_02', 'Kafka Error', e)
+        res.status(500).send('E_02 - Kafka Error. - ' + e)
+      }
+
+      res.json({
+        yetiId: yetiId,
+        ticket: ticket,
       })
     }
   }

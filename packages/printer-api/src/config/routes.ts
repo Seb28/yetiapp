@@ -5,6 +5,7 @@ export class Routes {
   public ticketController: TicketController = new TicketController()
 
   public routes(app): void {
-    app.route('/v1/tickets').post(this.ticketController.index)
+    app.route('/v1/ticket').post(this.ticketController.add)
+    app.route('/v1/ticket').patch(this.ticketController.update)
   }
 }
