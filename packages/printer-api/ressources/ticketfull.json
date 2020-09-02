@@ -1,0 +1,184 @@
+{
+  "type": "object",
+  "properties": {
+    "yetiId": {
+      "type": "string"
+    },
+    "ticket": {
+      "ticketId": { "type": "string" },
+      "createDate": {
+        "type": "string",
+        "format": "time",
+        "default": "Date.now"
+      },
+      "shop": {
+        "type": "object",
+        "properties": {
+          "shopId": { "type": "number" },
+          "shopGroup": { "type": "string" },
+          "shopName": { "type": "string" },
+          "shopInfo": { "type": "string" }
+        },
+        "required": ["shopId"]
+      },
+      "products": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "productId": { "type": "number" },
+            "productQty": {
+              "type": "object",
+              "properties": {
+                "quantity": { "type": "number" },
+                "unitCode": { "type": "string" }
+              }
+            },
+            "productDesc": { "type": "string" },
+            "productShortDesc": { "type": "string" },
+            "productTaxes": {
+              "$ref": "#/definitions/taxes"
+            },
+            "productPrices": {
+              "type": "object",
+              "properties": {
+                "unitPriceWithTaxes": { "$ref": "#/definitions/price" },
+                "unitPriceWithoutTaxes": { "$ref": "#/definitions/price" },
+                "priceWithTaxes": { "$ref": "#/definitions/price" },
+                "priceWithoutTaxes": { "$ref": "#/definitions/price" }
+              },
+              "required": [
+                "unitPriceWithTaxes",
+                "unitPriceWithoutTaxes",
+                "priceWithTaxes",
+                "priceWithoutTaxes"
+              ]
+            }
+          },
+          "required": [
+            "productId",
+            "productQty",
+            "productDesc",
+            "productTaxes",
+            "productPrices"
+          ]
+        }
+      },
+      "taxes": {
+        "$ref": "#/definitions/taxes"
+      },
+      "prices": {
+        "type": "object",
+        "properties": {
+          "priceWithTaxes": { "$ref": "#/definitions/price" },
+          "priceWithoutTaxes": { "$ref": "#/definitions/price" }
+        },
+        "required": ["priceWithTaxes", "priceWithoutTaxes"]
+      },
+      "client": { "$ref": "#/definitions/client" },
+      "required": [
+        "invoice_id",
+        "create_date",
+        "shop",
+        "products",
+        "taxes",
+        "prices"
+      ]
+    },
+    "client": { "$ref": "#/definitions/client" },
+    "certifaction": { "$ref": "#/definitions/certifaction" }
+  },
+  "required": ["yeti_id", "ticket"],
+  "definitions": {
+    "taxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "amount": {
+            "$ref": "#/definitions/price"
+          }
+        },
+        "required": ["code", "value", "amount"]
+      }
+    },
+    "price": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "scale": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "default": "EUR"
+            },
+            "symbol": {
+              "type": "string",
+              "default": "€"
+            }
+          },
+          "required": ["code", "symbol"]
+        }
+      },
+      "required": ["amount", "scale", "currency"]
+    },
+    "client": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientMail": {
+          "type": "string"
+        },
+        "clientPhone": {
+          "type": "string"
+        },
+        "clientFid": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fidShop": {
+                "type": "string"
+              },
+              "fidId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "time", "default": "Date.now" },
+        "code": { "type": "string", "default": "STAGING" }
+      }
+    },
+    "certifaction": {
+      "type": "object",
+      "properties": {
+        "currentState": { "$ref": "#/definitions/state" },
+        "states": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/state" }
+        },
+        "transaction": { "type": "string" }
+      }
+    }
+  }
+}

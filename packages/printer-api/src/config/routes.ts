@@ -1,12 +1,10 @@
 import { Request, Response } from 'express'
-import { NodesController } from '../controllers/nodes.controller'
+import { TicketController } from '../controllers/ticket.controller'
 
 export class Routes {
-  public nodesController: NodesController = new NodesController()
+  public ticketController: TicketController = new TicketController()
 
   public routes(app): void {
-    app.route('/').get(this.nodesController.index)
-
-    app.route('/nodes').get(this.nodesController.index)
+    app.route('/v1/tickets').post(this.ticketController.index)
   }
 }
