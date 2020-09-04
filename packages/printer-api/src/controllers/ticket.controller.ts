@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { v4 as uuid } from 'uuid'
 import * as Ajv from 'ajv'
-import * as ticketSchema from '../../ressources/Ticket.json'
+import * as ticketSchema from '../../ressources/ticket.json'
 import reader from 'readline-sync'
 
 // import { Kafka } from 'kafkajs'
