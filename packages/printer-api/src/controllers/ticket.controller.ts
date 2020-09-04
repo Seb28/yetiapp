@@ -4,30 +4,30 @@ import * as Ajv from 'ajv'
 import * as ticketSchema from '../../ressources/Ticket.json'
 import reader from 'readline-sync'
 
-import { Kafka } from 'kafkajs'
+// import { Kafka } from 'kafkajs'
 
 const ajv = new Ajv()
-const kafka = new Kafka({
-  clientId: 'test-app',
-  brokers: ['localhost:9192'],
-})
+// const kafka = new Kafka({
+//   clientId: 'test-app',
+//   brokers: ['localhost:9192'],
+// })
 
-const producer = kafka.producer({
-  maxInFlightRequests: 1,
-  idempotent: true,
-  transactionalId: 'uniqueProducerId',
-})
+// const producer = kafka.producer({
+//   maxInFlightRequests: 1,
+//   idempotent: true,
+//   transactionalId: 'uniqueProducerId',
+// })
 
-async function sendPayload(input: string) {
-  try {
-    await producer.send({
-      topic: 'tickets',
-      messages: [{ key: 'test', value: input }],
-    })
-  } catch (e) {
-    console.error('Caught Error while sending:', e)
-  }
-}
+// async function sendPayload(input: string) {
+//   try {
+//     await producer.send({
+//       topic: 'tickets',
+//       messages: [{ key: 'test', value: input }],
+//     })
+//   } catch (e) {
+//     console.error('Caught Error while sending:', e)
+//   }
+// }
 
 export class TicketController {
   public async update(req: Request, res: Response) {
@@ -44,13 +44,13 @@ export class TicketController {
         ticket: ticket,
       })
 
-      await producer.connect()
-      try {
-        await sendPayload(message)
-      } catch (e) {
-        console.error('E_02', 'Kafka Error', e)
-        res.status(500).send('E_02 - Kafka Error. - ' + e)
-      }
+      // await producer.connect()
+      // try {
+      //   await sendPayload(message)
+      // } catch (e) {
+      //   console.error('E_02', 'Kafka Error', e)
+      //   res.status(500).send('E_02 - Kafka Error. - ' + e)
+      // }
 
       res.json({
         yetiId: yetiId,
@@ -72,13 +72,13 @@ export class TicketController {
         ticket: ticket,
       })
 
-      await producer.connect()
-      try {
-        await sendPayload(message)
-      } catch (e) {
-        console.error('E_02', 'Kafka Error', e)
-        res.status(500).send('E_02 - Kafka Error. - ' + e)
-      }
+      // await producer.connect()
+      // try {
+      //   await sendPayload(message)
+      // } catch (e) {
+      //   console.error('E_02', 'Kafka Error', e)
+      //   res.status(500).send('E_02 - Kafka Error. - ' + e)
+      // }
 
       res.json({
         yetiId: yetiId,
