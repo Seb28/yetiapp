@@ -31,72 +31,92 @@ const ajv = new Ajv()
 
 export class TicketController {
   public async update(req: Request, res: Response) {
-    const yetiId = req.query['yetiId']
-    const ticket = req.body.ticket
-    const isValid = ajv.validate(ticketSchema, ticket)
-    if (!isValid) {
-      const errorMessages = ajv.errorsText()
-      console.warn('E_01', 'Validation Error', errorMessages)
-      res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header(
+      'Access-Control-Allow-Methods',
+      'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+    )
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+    if ('OPTIONS' == req.method) {
+      res.sendStatus(200)
     } else {
-      const message = JSON.stringify({
-        yetiId: yetiId,
-        ticket: ticket,
-      })
+      const yetiId = req.query['yetiId']
+      const ticket = req.body.ticket
+      const isValid = ajv.validate(ticketSchema, ticket)
+      if (!isValid) {
+        const errorMessages = ajv.errorsText()
+        console.warn('E_01', 'Validation Error', errorMessages)
+        res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
+      } else {
+        const message = JSON.stringify({
+          yetiId: yetiId,
+          ticket: ticket,
+        })
 
-      // await producer.connect()
-      // try {
-      //   await sendPayload(message)
-      // } catch (e) {
-      //   console.error('E_02', 'Kafka Error', e)
-      //   res.status(500).send('E_02 - Kafka Error. - ' + e)
-      // }
-      res.append('Access-Control-Allow-Origin', ['*'])
-      res.append('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
-      res.append('Access-Control-Allow-Headers', [
-        'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-        'https://yetiapp-admin.github.io',
-      ])
+        // await producer.connect()
+        // try {
+        //   await sendPayload(message)
+        // } catch (e) {
+        //   console.error('E_02', 'Kafka Error', e)
+        //   res.status(500).send('E_02 - Kafka Error. - ' + e)
+        // }
+        res.append('Access-Control-Allow-Origin', ['*'])
+        res.append('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
+        res.append('Access-Control-Allow-Headers', [
+          'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          'https://yetiapp-admin.github.io',
+        ])
 
-      res.json({
-        yetiId: yetiId,
-        ticket: ticket,
-      })
+        res.status(200).json({
+          yetiId: yetiId,
+          ticket: ticket,
+        })
+      }
     }
   }
   public async add(req: Request, res: Response) {
-    const ticket = req.body
-    const isValid = ajv.validate(ticketSchema, ticket)
-    if (!isValid) {
-      const errorMessages = ajv.errorsText()
-      console.warn('E_01', 'Validation Error', errorMessages)
-      res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header(
+      'Access-Control-Allow-Methods',
+      'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+    )
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+    if ('OPTIONS' == req.method) {
+      res.sendStatus(200)
     } else {
-      const yetiId = uuid()
-      const message = JSON.stringify({
-        yetiId: yetiId,
-        ticket: ticket,
-      })
+      const ticket = req.body
+      const isValid = ajv.validate(ticketSchema, ticket)
+      if (!isValid) {
+        const errorMessages = ajv.errorsText()
+        console.warn('E_01', 'Validation Error', errorMessages)
+        res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
+      } else {
+        const yetiId = uuid()
+        const message = JSON.stringify({
+          yetiId: yetiId,
+          ticket: ticket,
+        })
 
-      // await producer.connect()
-      // try {
-      //   await sendPayload(message)
-      // } catch (e) {
-      //   console.error('E_02', 'Kafka Error', e)
-      //   res.status(500).send('E_02 - Kafka Error. - ' + e)
-      // }
+        // await producer.connect()
+        // try {
+        //   await sendPayload(message)
+        // } catch (e) {
+        //   console.error('E_02', 'Kafka Error', e)
+        //   res.status(500).send('E_02 - Kafka Error. - ' + e)
+        // }
 
-      res.append('Access-Control-Allow-Origin', ['*'])
-      res.append('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
-      res.append('Access-Control-Allow-Headers', [
-        'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-        'https://yetiapp-admin.github.io',
-      ])
+        res.append('Access-Control-Allow-Origin', ['*'])
+        res.append('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
+        res.append('Access-Control-Allow-Headers', [
+          'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          'https://yetiapp-admin.github.io',
+        ])
 
-      res.json({
-        yetiId: yetiId,
-        ticket: ticket,
-      })
+        res.json({
+          yetiId: yetiId,
+          ticket: ticket,
+        })
+      }
     }
   }
 }
