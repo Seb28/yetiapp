@@ -83,6 +83,10 @@ export class TicketController {
       //   res.status(500).send('E_02 - Kafka Error. - ' + e)
       // }
 
+      res.append('Access-Control-Allow-Origin', ['*'])
+      res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+      res.append('Access-Control-Allow-Headers', 'Content-Type')
+
       res.json({
         yetiId: yetiId,
         ticket: ticket,
