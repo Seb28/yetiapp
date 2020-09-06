@@ -52,8 +52,11 @@ export class TicketController {
       //   res.status(500).send('E_02 - Kafka Error. - ' + e)
       // }
       res.append('Access-Control-Allow-Origin', ['*'])
-      res.append('Access-Control-Allow-Methods', 'POST')
-      res.append('Access-Control-Allow-Headers', ['*'])
+      res.append('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
+      res.append('Access-Control-Allow-Headers', [
+        'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        'https://yetiapp-admin.github.io',
+      ])
 
       res.json({
         yetiId: yetiId,
@@ -84,8 +87,11 @@ export class TicketController {
       // }
 
       res.append('Access-Control-Allow-Origin', ['*'])
-      res.append('Access-Control-Allow-Methods', 'POST')
-      res.append('Access-Control-Allow-Headers', ['*'])
+      res.append('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
+      res.append('Access-Control-Allow-Headers', [
+        'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        'https://yetiapp-admin.github.io',
+      ])
 
       res.json({
         yetiId: yetiId,
