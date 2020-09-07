@@ -1,0 +1,20 @@
+{
+  "name": "@yeti/mongo-util",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "types": "./lib/index.d.ts",
+  "main": "./lib/mongo-util.js",
+  "scripts": {
+    "build": "tsc",
+    "build-wip": "NODE_ENV=production webpack -p --config ./webpack.config.js --display-used-exports",
+    "watch": "npm run watch-ts",
+    "watch-ts": "webpack --config ./webpack.config.js --watch",
+    "clean": "rimraf ./lib"
+  },
+  "dependencies": {
+    "mongodb": "^3.3.5"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.3.12"
+  }
+}

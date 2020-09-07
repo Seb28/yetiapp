@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "yetiId": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    }
+  },
+  "required": ["yetiId", "userId"]
+}
