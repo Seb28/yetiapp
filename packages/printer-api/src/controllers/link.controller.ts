@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
 import * as Ajv from 'ajv'
+import { config } from '../config'
 import * as linkSchema from '../../ressources/linkTicket.json'
+import * as m from 'mongodb'
 import reader from 'readline-sync'
-import { MongoClient } from '@yeti/mongo-util'
+import assert = require('assert')
 
 // import { Kafka } from 'kafkajs'
 
@@ -31,46 +33,30 @@ const ajv = new Ajv()
 
 export class LinkController {
   public async link(req: Request, res: Response) {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header(
-      'Access-Control-Allow-Methods',
-      'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-    )
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
-    )
-    if ('OPTIONS' == req.method) {
-      res.sendStatus(200)
+    const link = req.body
+    const client = await m.connect(config.mongo.uri, {
+      useUnifiedTopology: true,
+    })
+    const db = client.db(config.mongo.db)
+
+    const isValid = ajv.validate(linkSchema, link)
+    if (!isValid) {
+      const errorMessages = ajv.errorsText()
+      console.warn('E_01', 'Validation Error', errorMessages)
+      res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
     } else {
-      const ticket = req.body
-      const isValid = ajv.validate(linkSchema, ticket)
-      if (!isValid) {
-        const errorMessages = ajv.errorsText()
-        console.warn('E_01', 'Validation Error', errorMessages)
-        res.status(400).send('E_01 - Validation Error. - ' + errorMessages)
-      } else {
-        const yetiId = uuid()
-        const message = JSON.stringify({
-          yetiId: yetiId,
-          ticket: ticket,
-        })
+      const yetiId = link.yetiId
+      const userId = link.userId
 
-        // await producer.connect()
-        // try {
-        //   await sendPayload(message)
-        // } catch (e) {
-        //   console.error('E_02', 'Kafka Error', e)
-        //   res.status(500).send('E_02 - Kafka Error. - ' + e)
-        // }
-
-        MongoClient
-
-        res.json({
-          yetiId: yetiId,
-          ticket: ticket,
-        })
-      }
+      const update = await db
+        .collection(config.mongo.collection)
+        .updateOne({ yetiId: yetiId }, { $set: { userId: userId } })
+      const ticket = await db
+        .collection(config.mongo.collection)
+        .find({ yetiId: yetiId })
+        .toArray()
+      client.close()
+      res.status(200).send(ticket[0])
     }
   }
 }

@@ -2,11 +2,15 @@ import { Request, Response } from 'express'
 import { v4 as uuid } from 'uuid'
 import * as Ajv from 'ajv'
 import * as ticketSchema from '../../ressources/ticket.json'
+import * as m from 'mongodb'
 import reader from 'readline-sync'
+import { config } from '../config'
+import assert = require('assert')
+
+const ajv = new Ajv()
 
 // import { Kafka } from 'kafkajs'
 
-const ajv = new Ajv()
 // const kafka = new Kafka({
 //   clientId: 'test-app',
 //   brokers: ['localhost:9192'],
@@ -111,6 +115,18 @@ export class TicketController {
           'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
           'https://yetiapp-admin.github.io',
         ])
+
+        m.connect(config.mongo.uri, function(err, client) {
+          assert.equal(null, err)
+          console.log('Connected successfully to server')
+          const db = client.db(config.mongo.db)
+          db.collection(config.mongo.collection).insertOne({
+            yetiId: yetiId,
+            ticket: ticket,
+          })
+
+          client.close()
+        })
 
         res.json({
           yetiId: yetiId,
