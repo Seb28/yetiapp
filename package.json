@@ -24,7 +24,7 @@
     "nodemon": "^2.0.1",
     "prettier": "1.19.1",
     "request": "^2.88.0",
-    "requestretry": "^4.0.2",
+    "requestretry": "^7.0.0",
     "rimraf": "^3.0.0",
     "sinon": "^7.5.0",
     "ts-mocha": "^6.0.0",
